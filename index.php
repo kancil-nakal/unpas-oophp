@@ -8,61 +8,50 @@ class Produk {
            $harga,
            $diskon;
 
-    public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0 )
-    {
+    public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0 ){
         $this->judul = $judul;
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
     }
 
-    public function setJudul($judul)
-    {
+    public function setJudul($judul){
       $this->judul = $judul;
     }
 
-    public function getJudul()
-    {
+    public function getJudul(){
       return $this->judul;
     }
 
-    public function setPenulis($penulis)
-    {
+    public function setPenulis($penulis){
       $this->penulis = $penulis;
     }
 
-    public function getPenulis()
-    {
+    public function getPenulis(){
       return $this->penulis;
     }
 
-    public function setPenerbit($penerbit)
-    {
+    public function setPenerbit($penerbit){
       $this->penerbit = $penerbit;
     }
 
-    public function getPenerbit()
-    {
+    public function getPenerbit(){
       return $this->penerbit;
     }
 
-    public function setDiskon( $diskon )
-    {
+    public function setDiskon( $diskon ){
         $this->diskon = $diskon;
     }
 
-    public function getDiskon()
-    {
+    public function getDiskon(){
       return $this->diskon;
     }
 
-    public function setHarga()
-    {
+    public function setHarga(){
         $this->harga = $harga;
     }
 
-    public function getHarga()
-    {
+    public function getHarga(){
         return $this->harga - ($this->harga * $this->diskon / 100);
     }
 
@@ -114,20 +103,29 @@ class Game extends Produk{
 
 }
 
+class CetakInfoProduk {
+  public $daftarProduk = array();
+
+  public function tambahProduk( Produk $produk){
+    $this->daftarProduk[] = $produk;
+  }
+
+  public function cetak(){
+    $str = "DAFTAR PRODUK : <br>";
+
+    foreach( $this->daftarProduk as $p ){
+      $str .= "- {$p->getInfoProduk()} <br>";
+    }
+  return $str;
+  }
+}
 
 $produk1 = new Produk("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100);
 $produk2 = new Produk("Uncharted", "Neil Druckmann", "Sony Computer", 250000, 50);
 
-echo $produk1->getInfoProduk();
-echo "<br>";
-echo $produk2->getInfoProduk();
-echo "<hr>";
+$cetakProduk = new CetakInfoProduk();
+ $cetakProduk->tambahProduk( $produk1 );
+ $cetakProduk->tambahProduk( $produk2 );
 
-$produk2->setDiskon(50);
-echo $produk2->getHarga();
-echo "<hr>";
-
-$produk1->setJudul("ASHFBSAf");
-echo $produk1->getJudul();
-
+ echo $cetakProduk->cetak();
 ?>
