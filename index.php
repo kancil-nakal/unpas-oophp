@@ -1,9 +1,8 @@
 <?php
 
 interface InfoProduk{
-    public function getInfoProduk();
+  public function getInfoProduk();
 }
-
 
 abstract class Produk {
 
