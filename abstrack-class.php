@@ -1,6 +1,6 @@
 <?php
 
-class Produk {
+abstract class Produk {
 
     private $judul,
            $penulis,
@@ -60,7 +60,9 @@ class Produk {
         return "$this->penulis, $this->penerbit";
     }
 
-    public function getInfoProduk(){
+    abstract public function getInfoProduk();
+    
+    public function getinfo(){
         $str = "{$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
         return $str;
     }
@@ -80,7 +82,8 @@ class Komik extends Produk {
     }
 
     public function getInfoProduk(){
-        $str = "Komik : " . parent::getInfoProduk() . " - {$this->jmlHalaman} Halaman.";
+        $str = "Komik : " . $this->getInfo() . " - {$this->jmlHalaman} Halaman.";
+
         return $str;
     }
 }
@@ -97,7 +100,7 @@ class Game extends Produk{
 
 
     public function getInfoProduk(){
-        $str = "Game : " . parent::getInfoProduk() . " ~ {$this->waktuMain} Jam.";
+        $str = "Game : " . $this->getInfo() . " ~ {$this->waktuMain} Jam.";
         return $str;
     }
 
